@@ -1,9 +1,12 @@
 package com.krolak.windsurferweatherforecaster.controllers;
 
+import com.krolak.windsurferweatherforecaster.dtos.FindGoodWeatherLocationRequestDto;
+import com.krolak.windsurferweatherforecaster.dtos.GoodWeatherLocationDto;
 import com.krolak.windsurferweatherforecaster.services.WeatherForecastService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -14,8 +17,8 @@ public class ForecastController {
     private final WeatherForecastService weatherForecastService;
 
     @GetMapping
-    public ResponseEntity<String> getForecast() {
-        String response = weatherForecastService.performForecast();
+    public ResponseEntity<GoodWeatherLocationDto> getForecast(@RequestBody FindGoodWeatherLocationRequestDto request) {
+        GoodWeatherLocationDto response = weatherForecastService.performForecast(request.getDate());
         return ResponseEntity.ok(response);
     }
 }

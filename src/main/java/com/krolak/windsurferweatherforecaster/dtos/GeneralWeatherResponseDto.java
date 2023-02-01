@@ -10,14 +10,16 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-public class WeatherResponseDto {
+public class GeneralWeatherResponseDto {
     private String city_name;
+    private String country_code;
     private List<WeatherDataDto> data;
 
     @Override
     public String toString() {
-        return "WeatherResponseDto{" +
+        return "GeneralWeatherResponseDto{" +
                 "city_name='" + city_name + '\'' +
+                ", country_code='" + country_code + '\'' +
                 ", data=" + data +
                 '}';
     }
@@ -25,10 +27,10 @@ public class WeatherResponseDto {
     @Getter
     @Setter
     @NoArgsConstructor
-    private static class WeatherDataDto {
+    public static class WeatherDataDto {
         private LocalDate datetime;
-        double temp;
-        double wind_spd;
+        private double temp;
+        private double wind_spd;
 
         @Override
         public String toString() {
