@@ -15,7 +15,7 @@ public class ForecastController {
 
     @GetMapping
     public ResponseEntity<String> getForecast() {
-        String response = weatherForecastService.askForWeather();
+        String response = weatherForecastService.performForecast();
         return ResponseEntity.ok(response);
     }
 }
