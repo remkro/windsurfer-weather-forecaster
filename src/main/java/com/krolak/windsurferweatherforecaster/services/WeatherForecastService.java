@@ -3,6 +3,7 @@ package com.krolak.windsurferweatherforecaster.services;
 import com.krolak.windsurferweatherforecaster.dtos.GeneralWeatherResponseDto;
 import com.krolak.windsurferweatherforecaster.dtos.GoodWeatherLocationDto;
 import com.krolak.windsurferweatherforecaster.exceptions.NoLocationsProvidedException;
+import com.krolak.windsurferweatherforecaster.interfaces.WeatherBitApiUrlCreator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -11,6 +12,7 @@ import org.springframework.web.client.RestTemplate;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -18,8 +20,8 @@ public class WeatherForecastService {
     private final RestTemplate restTemplate;
     private final WeatherAnalysisService weatherAnalysisService;
     private final WeatherBitApiUrlCreator weatherBitApiUrlCreator;
-    @Value("#{'${listOfCities}'.split(',')}")
-    private List<String> locations;
+    @Value("#{${locations}}")
+    private Map<String, List<String>> locations;
 
 
     public GoodWeatherLocationDto performForecast(LocalDate date) {
@@ -36,10 +38,10 @@ public class WeatherForecastService {
         GeneralWeatherResponseDto response;
         List<GeneralWeatherResponseDto> responses = new ArrayList<>();
 
-        for (String location : locations) {
-            resource = weatherBitApiUrlCreator.create(location);
+        for (Map.Entry<String, List<String>> entrySet : locations.entrySet()) {
+            resource = weatherBitApiUrlCreator.create(entrySet);
             response = restTemplate.getForObject(resource, GeneralWeatherResponseDto.class);
-            if(response == null)
+            if (response == null)
                 continue;
             responses.add(response);
         }
