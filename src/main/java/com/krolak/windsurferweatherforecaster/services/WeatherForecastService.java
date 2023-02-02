@@ -39,6 +39,8 @@ public class WeatherForecastService {
         for (String location : locations) {
             resource = weatherBitApiUrlCreator.create(location);
             response = restTemplate.getForObject(resource, GeneralWeatherResponseDto.class);
+            if(response == null)
+                continue;
             responses.add(response);
         }
 
