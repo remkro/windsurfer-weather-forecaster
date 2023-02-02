@@ -20,7 +20,7 @@ public class AppConfig {
 
     @Bean
     WeatherBitApiUrlCreator getWeatherBitApiUrlCreator() {
-        if(urlCreationMethod.equalsIgnoreCase("cityName"))
+        if (urlCreationMethod.equalsIgnoreCase("cityName"))
             return new CityWeatherBitApiUrlCreator();
         return new CoordinatesWeatherBitApiUrlCreator();
     }

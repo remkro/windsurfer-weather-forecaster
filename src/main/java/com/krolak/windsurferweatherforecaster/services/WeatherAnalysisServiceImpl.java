@@ -3,6 +3,7 @@ package com.krolak.windsurferweatherforecaster.services;
 import com.krolak.windsurferweatherforecaster.dtos.GeneralWeatherResponseDto;
 import com.krolak.windsurferweatherforecaster.dtos.GoodWeatherLocationDto;
 import com.krolak.windsurferweatherforecaster.exceptions.NoGoodWeatherLocationFoundException;
+import com.krolak.windsurferweatherforecaster.interfaces.WeatherAnalysisService;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -11,15 +12,15 @@ import java.util.Comparator;
 import java.util.List;
 
 @Service
-public class WeatherAnalysisService {
+public class WeatherAnalysisServiceImpl implements WeatherAnalysisService {
 
-    public GoodWeatherLocationDto findLocationWithGoodWeather(List<GeneralWeatherResponseDto> weathers, LocalDate date) {
+    public GoodWeatherLocationDto filterLocations(List<GeneralWeatherResponseDto> weathers, LocalDate date) {
         List<GoodWeatherLocationDto> unfilteredWeatherList = createFlatList(weathers);
         return unfilteredWeatherList.stream()
-               .filter(u -> u.getDate().equals(date))
-               .filter(u -> checkForGoodConditions(u.getAverageTemperature(), u.getWindSpeed()))
-               .max(Comparator.comparingDouble(u -> calculateUsingSpecialFormula(u.getAverageTemperature(), u.getWindSpeed())))
-               .orElseThrow(() -> new NoGoodWeatherLocationFoundException("Unable to find location with good weather!"));
+                .filter(u -> u.getDate().equals(date))
+                .filter(u -> checkForGoodConditions(u.getAverageTemperature(), u.getWindSpeed()))
+                .max(Comparator.comparingDouble(u -> calculateUsingSpecialFormula(u.getAverageTemperature(), u.getWindSpeed())))
+                .orElseThrow(() -> new NoGoodWeatherLocationFoundException("Unable to find location with good weather!"));
     }
 
     private List<GoodWeatherLocationDto> createFlatList(List<GeneralWeatherResponseDto> weathers) {
