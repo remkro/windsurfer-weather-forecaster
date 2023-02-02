@@ -17,10 +17,7 @@ import java.util.List;
 public class WeatherForecastService {
     private final RestTemplate restTemplate;
     private final WeatherAnalysisService weatherAnalysisService;
-    @Value("${apiKey}")
-    private String apiKey;
-    @Value("${apiUrl}")
-    private String apiUrl;
+    private final WeatherBitApiUrlCreator weatherBitApiUrlCreator;
     @Value("#{'${listOfCities}'.split(',')}")
     private List<String> locations;
 
@@ -40,7 +37,7 @@ public class WeatherForecastService {
         List<GeneralWeatherResponseDto> responses = new ArrayList<>();
 
         for (String location : locations) {
-            resource = apiUrl + location + "&key=" + apiKey;
+            resource = weatherBitApiUrlCreator.create(location);
             response = restTemplate.getForObject(resource, GeneralWeatherResponseDto.class);
             responses.add(response);
         }
