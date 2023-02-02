@@ -4,7 +4,6 @@ import com.krolak.windsurferweatherforecaster.interfaces.WeatherBitApiUrlCreator
 import org.springframework.beans.factory.annotation.Value;
 
 import java.util.List;
-import java.util.Map;
 
 public class CoordinatesWeatherBitApiUrlCreator implements WeatherBitApiUrlCreator {
     @Value("${apiKey}")
