@@ -12,7 +12,7 @@ public class CoordinatesWeatherBitApiUrlCreator implements WeatherBitApiUrlCreat
     @Value("${apiUrl}")
     private String apiUrl;
 
-    public String create(Map.Entry<String, List<String>> locationsMap) {
-        return apiUrl + "lat=" + locationsMap.getValue().get(0) + "&lon=" + locationsMap.getValue().get(1) + "&key=" + apiKey;
+    public String create(String city, List<String> coordinates) {
+        return apiUrl + "lat=" + coordinates.get(0) + "&lon=" + coordinates.get(1) + "&key=" + apiKey;
     }
 }

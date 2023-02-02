@@ -4,5 +4,5 @@ import java.util.List;
 import java.util.Map;
 
 public interface WeatherBitApiUrlCreator {
-    String create(Map.Entry<String, List<String>> locationsMap);
+    String create(String city, List<String> coordinates);
 }

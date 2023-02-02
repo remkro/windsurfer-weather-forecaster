@@ -39,7 +39,7 @@ public class WindsurfingLocationFinderImpl implements WindsurfingLocationFinder 
         List<GeneralWeatherResponseDto> responses = new ArrayList<>();
 
         for (Map.Entry<String, List<String>> entrySet : locations.entrySet()) {
-            resource = weatherBitApiUrlCreator.create(entrySet);
+            resource = weatherBitApiUrlCreator.create(entrySet.getKey(), entrySet.getValue());
             response = restTemplate.getForObject(resource, GeneralWeatherResponseDto.class);
             if (response == null)
                 continue;
