@@ -1,8 +1,8 @@
 ![windsurfer-app-logo](https://user-images.githubusercontent.com/105795682/216633907-fff803c6-fb0d-4639-830f-f52dc723d303.jpg)
 
 <h2>Description</h2>
-The application finds the best windsurfing location for given date when taking into cosideration very specific weather conditions. 
-There are couple of default locations for weather-check, but it can by simple extended by changing the application.properties file.
+The application finds the best windsurfing location for given date when taking into consideration very specific weather conditions. 
+There are couple of default locations for weather-check, but it can be extended simply by changing the application.properties file and providing city name and/or geographical coordinates.
 
 
 <h2>Technologies</h2>
