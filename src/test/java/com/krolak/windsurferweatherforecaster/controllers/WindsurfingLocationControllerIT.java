@@ -75,4 +75,20 @@ class WindsurfingLocationControllerIT {
         String responseAsString = result.getResponse().getContentAsString();
         assertTrue(responseAsString.contains("DATE_MUST_BE_PRESENT_OR_FUTURE"));
     }
+
+    @Test
+    public void should_get_validation_error_if_provided_date_is_null() throws Exception {
+        FindGoodWeatherLocationRequestDto request = new FindGoodWeatherLocationRequestDto(null);
+        String body = mapper.writeValueAsString(request);
+
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/windsurfing-location/best")
+                        .content(body)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isBadRequest())
+                .andReturn();
+
+        String responseAsString = result.getResponse().getContentAsString();
+        assertTrue(responseAsString.contains("DATE_CANNOT_BE_NULL"));
+    }
 }
