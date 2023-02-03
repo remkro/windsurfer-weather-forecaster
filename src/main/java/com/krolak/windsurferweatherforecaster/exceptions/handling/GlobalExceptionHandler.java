@@ -22,7 +22,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler({NoLocationsProvidedException.class})
-    public ResponseEntity<ExceptionResponseDto> handleNoLocationsProvidedExceptionn(Exception e) {
+    public ResponseEntity<ExceptionResponseDto> handleNoLocationsProvidedException(Exception e) {
         ExceptionResponseDto response = new ExceptionResponseDto(e.getMessage());
         return ResponseEntity.badRequest().body(response);
     }
