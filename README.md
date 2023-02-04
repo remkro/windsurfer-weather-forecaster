@@ -4,6 +4,10 @@
 The application finds the best windsurfing location for given date when taking into consideration very specific weather conditions. 
 There are couple of default locations for weather-check, but it can be extended simply by changing the application.properties file and providing city name and/or geographical coordinates.
 
+<hr>
+<strong>Limitations</strong>
+
+User can search for a location along with the weather for up to the next 16 consecutive days including present day. Checking later or past dates will lead to an error.
 
 <h2>Technologies</h2>
 <ul>
@@ -21,6 +25,15 @@ There are couple of default locations for weather-check, but it can be extended 
 <p>1. Clone the project from the repository.</p>
 <p>2. Use the following command to build the project: <strong>mvn clean install</strong></p>
 <p>3. Use the following command to run the application: <strong>mvn spring-boot:run</strong></p>
+
+<h2>Endpoints</h2>
+Here are some endpoints you can call:
+
+```
+http://localhost:8081/api/v1/windsurfing-location?date={requestedDate}
+```
+
+where you should replace {requestedDate} with your desired date in format <strong>yyyy-MM-dd</strong>
 
 <h2>Future development</h2>
 Planning to add:
