@@ -2,11 +2,13 @@ package com.krolak.windsurferweatherforecaster.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.krolak.windsurferweatherforecaster.WindsurferWeatherForecasterApplication;
-import com.krolak.windsurferweatherforecaster.dtos.FindGoodWeatherLocationRequestDto;
+import com.krolak.windsurferweatherforecaster.dtos.GoodWeatherLocationDto;
+import com.krolak.windsurferweatherforecaster.interfaces.WindsurfingLocationFinder;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
@@ -15,6 +17,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -24,33 +27,29 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class WindsurfingLocationControllerIT {
     @Autowired
     private MockMvc mockMvc;
-    @Autowired
-    private ObjectMapper mapper;
+    @MockBean
+    private WindsurfingLocationFinder finder;
 
     @Test
     public void should_get_best_location_and_weather_for_windsurfing() throws Exception {
-        FindGoodWeatherLocationRequestDto request = new FindGoodWeatherLocationRequestDto(LocalDate.now());
-        String body = mapper.writeValueAsString(request);
-
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/windsurfing-location/best")
-                        .content(body)
+        LocalDate date = LocalDate.now();
+        when(finder.findBestWeatherLocation(date)).thenReturn(
+                new GoodWeatherLocationDto("Bridgetown", "BB", date, 25.7, 9.9));
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/windsurfing-location?date=" + date)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.cityName").isNotEmpty())
-                .andExpect(jsonPath("$.country").isNotEmpty())
-                .andExpect(jsonPath("$.date").value(LocalDate.now().toString()))
-                .andExpect(jsonPath("$.averageTemperature").isNumber())
-                .andExpect(jsonPath("$.windSpeed").isNumber());
+                .andExpect(jsonPath("$.cityName").value("Bridgetown"))
+                .andExpect(jsonPath("$.country").value("BB"))
+                .andExpect(jsonPath("$.date").value(date.toString()))
+                .andExpect(jsonPath("$.averageTemperature").value(25.7))
+                .andExpect(jsonPath("$.windSpeed").value(9.9));
     }
 
     @Test
     public void should_get_validation_error_if_provided_date_is_more_than_16_days() throws Exception {
-        FindGoodWeatherLocationRequestDto request = new FindGoodWeatherLocationRequestDto(LocalDate.now().plusDays(16));
-        String body = mapper.writeValueAsString(request);
-
-        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/windsurfing-location/best")
-                        .content(body)
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/windsurfing-location?date=" +
+                                LocalDate.now().plusDays(16))
                         .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isBadRequest())
@@ -62,11 +61,8 @@ class WindsurfingLocationControllerIT {
 
     @Test
     public void should_get_validation_error_if_provided_date_is_in_the_past() throws Exception {
-        FindGoodWeatherLocationRequestDto request = new FindGoodWeatherLocationRequestDto(LocalDate.now().minusDays(10));
-        String body = mapper.writeValueAsString(request);
-
-        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/windsurfing-location/best")
-                        .content(body)
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/windsurfing-location?date=" +
+                                LocalDate.now().minusDays(16))
                         .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isBadRequest())
@@ -74,21 +70,5 @@ class WindsurfingLocationControllerIT {
 
         String responseAsString = result.getResponse().getContentAsString();
         assertTrue(responseAsString.contains("DATE_MUST_BE_PRESENT_OR_FUTURE"));
-    }
-
-    @Test
-    public void should_get_validation_error_if_provided_date_is_null() throws Exception {
-        FindGoodWeatherLocationRequestDto request = new FindGoodWeatherLocationRequestDto(null);
-        String body = mapper.writeValueAsString(request);
-
-        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/windsurfing-location/best")
-                        .content(body)
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andDo(print())
-                .andExpect(status().isBadRequest())
-                .andReturn();
-
-        String responseAsString = result.getResponse().getContentAsString();
-        assertTrue(responseAsString.contains("DATE_CANNOT_BE_NULL"));
     }
 }
