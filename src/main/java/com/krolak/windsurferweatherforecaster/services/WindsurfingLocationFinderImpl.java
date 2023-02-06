@@ -18,6 +18,7 @@ import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
+//pomysl o lepszej nazwie zamiast finder, WindsurfingLocationServiceImpl
 public class WindsurfingLocationFinderImpl implements WindsurfingLocationFinder {
     private final RestTemplate restTemplate;
     private final WeatherAnalysisService weatherAnalysisService;
@@ -31,16 +32,18 @@ public class WindsurfingLocationFinderImpl implements WindsurfingLocationFinder 
     }
 
     private List<GeneralWeatherResponseDto> callWeatherBitApiToCheckWeatherForAllLocations() {
+        //staraj sie uzywac {} nawet dla pojedynczych ifow
         if (locations.size() == 0)
             throw new NoLocationsProvidedException("There are no locations to check!");
 
-        String resource;
+        String resource; //mozesz dac to w petli, i tak Stringi sa niemutowalne wiec za kazda iteracja bedzie tworzony nowy String a zmiennej resources nie uzywasz poza petla
         GeneralWeatherResponseDto response;
         List<GeneralWeatherResponseDto> responses = new ArrayList<>();
 
         for (Map.Entry<String, List<String>> entrySet : locations.entrySet()) {
             resource = weatherBitApiUrlCreator.create(entrySet.getKey(), entrySet.getValue());
             response = restTemplate.getForObject(resource, GeneralWeatherResponseDto.class);
+            //moze zamiast continue to if !=null to wtedy dodac to listy
             if (response == null)
                 continue;
             responses.add(response);

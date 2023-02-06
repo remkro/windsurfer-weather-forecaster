@@ -26,6 +26,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler({NoLocationsProvidedException.class})
+    //w paramterze metody NoLocationsProvidedException e
     public ResponseEntity<ExceptionResponseDto> handleNoLocationsProvidedException(Exception e) {
         ExceptionResponseDto response = new ExceptionResponseDto(e.getMessage());
         return ResponseEntity.badRequest().body(response);

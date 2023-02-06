@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Value;
 
 import java.util.List;
 
+//do katalogu utils i bez interfejsu
 public class CityWeatherBitApiUrlCreator implements WeatherBitApiUrlCreator {
     @Value("${apiKey}")
     private String apiKey;

@@ -29,6 +29,7 @@ public class WindsurfingLocationController {
                     @FutureOrPresent(message = "DATE_MUST_BE_PRESENT_OR_FUTURE")
                     @SupportedDate(message = "DATE_MUST_BE_IN_SUPPORTED_RANGE") LocalDate date) {
         GoodWeatherLocationDto response = finder.findBestWeatherLocation(date);
+        //jesli dajesz @RestController to nie musisz zwracac ResponseEntity<T> tylko moze byc samo T, domyslna odpowiedz i tak bedzie 200
         return ResponseEntity.ok(response);
     }
 }

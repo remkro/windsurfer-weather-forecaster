@@ -13,11 +13,14 @@ class CityWeatherBitApiUrlCreatorTest {
 
     @BeforeEach
     public void setUp() {
+
+        //a moze dla testow tez zrobic plik application.properties
         ReflectionTestUtils.setField(creator, "apiUrl", "https://api.weatherbit.io/v2.0/forecast/daily?");
         ReflectionTestUtils.setField(creator, "apiKey", "6e75e95ca7084679aa78dfb9daf2b5c2");
     }
 
     @Test
+    //zainstaluj sobie sonarlinta, podpowiada ze metoda nie musi byc publiczna
     public void should_create_proper_url() {
         String actualUrl = creator.create("Jastarnia", List.of("54.69606", "18.67873"));
         String expectedUrl = "https://api.weatherbit.io/v2.0/forecast/daily?city=Jastarnia&" +

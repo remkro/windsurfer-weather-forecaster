@@ -25,6 +25,7 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 class WindsurfingLocationFinderImplTest {
     @Mock
+    //nie uzywasz restTemplate
     private RestTemplate restTemplate;
     @Mock
     private WeatherAnalysisService analysisService;
@@ -35,6 +36,7 @@ class WindsurfingLocationFinderImplTest {
 
     @Test
     public void should_find_best_location_for_windsurfing() {
+        // zrob //given //when //then i oddziel te bloki enterem
         Map<String, List<String>> locations = new HashMap<>();
         locations.put("Fortaleza", List.of("-3.71722", "-38.54306"));
         ReflectionTestUtils.setField(finder, "locations", locations);
