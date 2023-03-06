@@ -1,4 +1,4 @@
-package com.krolak.windsurferweatherforecaster.dtos;
+package com.krolak.windsurferweatherforecaster.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,8 +1,8 @@
 package com.krolak.windsurferweatherforecaster.configuration;
 
 import com.krolak.windsurferweatherforecaster.interfaces.WeatherBitApiUrlCreator;
-import com.krolak.windsurferweatherforecaster.services.CityWeatherBitApiUrlCreator;
-import com.krolak.windsurferweatherforecaster.services.CoordinatesWeatherBitApiUrlCreator;
+import com.krolak.windsurferweatherforecaster.service.CityWeatherBitApiUrlCreator;
+import com.krolak.windsurferweatherforecaster.service.CoordinatesWeatherBitApiUrlCreator;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

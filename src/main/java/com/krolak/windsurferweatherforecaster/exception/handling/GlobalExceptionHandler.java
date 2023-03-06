@@ -1,9 +1,9 @@
-package com.krolak.windsurferweatherforecaster.exceptions.handling;
+package com.krolak.windsurferweatherforecaster.exception.handling;
 
-import com.krolak.windsurferweatherforecaster.dtos.ExceptionResponseDto;
-import com.krolak.windsurferweatherforecaster.dtos.FieldValidationErrorDto;
-import com.krolak.windsurferweatherforecaster.exceptions.NoGoodWeatherLocationFoundException;
-import com.krolak.windsurferweatherforecaster.exceptions.NoLocationsProvidedException;
+import com.krolak.windsurferweatherforecaster.dto.ExceptionResponseDto;
+import com.krolak.windsurferweatherforecaster.dto.FieldValidationErrorDto;
+import com.krolak.windsurferweatherforecaster.exception.NoGoodWeatherLocationFoundException;
+import com.krolak.windsurferweatherforecaster.exception.NoLocationsProvidedException;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;

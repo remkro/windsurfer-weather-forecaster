@@ -1,4 +1,4 @@
-package com.krolak.windsurferweatherforecaster.exceptions;
+package com.krolak.windsurferweatherforecaster.exception;
 
 public class NoGoodWeatherLocationFoundException extends RuntimeException {
     public NoGoodWeatherLocationFoundException(String message) {

@@ -1,4 +1,4 @@
-package com.krolak.windsurferweatherforecaster.services;
+package com.krolak.windsurferweatherforecaster.service;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

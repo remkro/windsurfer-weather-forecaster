@@ -1,8 +1,8 @@
-package com.krolak.windsurferweatherforecaster.services;
+package com.krolak.windsurferweatherforecaster.service;
 
-import com.krolak.windsurferweatherforecaster.dtos.GeneralWeatherResponseDto;
-import com.krolak.windsurferweatherforecaster.dtos.GoodWeatherLocationDto;
-import com.krolak.windsurferweatherforecaster.exceptions.NoGoodWeatherLocationFoundException;
+import com.krolak.windsurferweatherforecaster.dto.GeneralWeatherResponseDto;
+import com.krolak.windsurferweatherforecaster.dto.GoodWeatherLocationDto;
+import com.krolak.windsurferweatherforecaster.exception.NoGoodWeatherLocationFoundException;
 import com.krolak.windsurferweatherforecaster.interfaces.WeatherAnalysisService;
 import org.springframework.stereotype.Service;
 
@@ -15,8 +15,7 @@ import java.util.List;
 public class WeatherAnalysisServiceImpl implements WeatherAnalysisService {
 
     public GoodWeatherLocationDto filterLocations(List<GeneralWeatherResponseDto> weathers, LocalDate date) {
-        List<GoodWeatherLocationDto> unfilteredWeatherList = createFlatList(weathers);
-        return unfilteredWeatherList.stream()
+        return createFlatList(weathers).stream()
                 .filter(u -> u.getDate().equals(date))
                 .filter(u -> checkForGoodConditions(u.getAverageTemperature(), u.getWindSpeed()))
                 .max(Comparator.comparingDouble(u -> calculateUsingSpecialFormula(u.getAverageTemperature(), u.getWindSpeed())))

@@ -1,4 +1,4 @@
-package com.krolak.windsurferweatherforecaster.dtos;
+package com.krolak.windsurferweatherforecaster.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,8 +9,6 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class FieldValidationErrorDto {
-    private String field;
+public class ExceptionResponseDto {
     private String errorMessage;
-    private Object rejectedValue;
 }
