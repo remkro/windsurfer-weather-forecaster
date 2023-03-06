@@ -1,6 +1,6 @@
-package com.krolak.windsurferweatherforecaster.controllers;
+package com.krolak.windsurferweatherforecaster.controller;
 
-import com.krolak.windsurferweatherforecaster.dtos.GoodWeatherLocationDto;
+import com.krolak.windsurferweatherforecaster.dto.GoodWeatherLocationDto;
 import com.krolak.windsurferweatherforecaster.interfaces.WindsurfingLocationFinder;
 import com.krolak.windsurferweatherforecaster.validation.SupportedDate;
 import jakarta.validation.constraints.FutureOrPresent;

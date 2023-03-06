@@ -1,7 +1,7 @@
 package com.krolak.windsurferweatherforecaster.interfaces;
 
-import com.krolak.windsurferweatherforecaster.dtos.GeneralWeatherResponseDto;
-import com.krolak.windsurferweatherforecaster.dtos.GoodWeatherLocationDto;
+import com.krolak.windsurferweatherforecaster.dto.GeneralWeatherResponseDto;
+import com.krolak.windsurferweatherforecaster.dto.GoodWeatherLocationDto;
 
 import java.time.LocalDate;
 import java.util.List;

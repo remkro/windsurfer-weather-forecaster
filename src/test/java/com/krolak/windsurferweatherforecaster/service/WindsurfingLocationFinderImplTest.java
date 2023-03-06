@@ -1,7 +1,7 @@
-package com.krolak.windsurferweatherforecaster.services;
+package com.krolak.windsurferweatherforecaster.service;
 
-import com.krolak.windsurferweatherforecaster.dtos.GoodWeatherLocationDto;
-import com.krolak.windsurferweatherforecaster.exceptions.NoLocationsProvidedException;
+import com.krolak.windsurferweatherforecaster.dto.GoodWeatherLocationDto;
+import com.krolak.windsurferweatherforecaster.exception.NoLocationsProvidedException;
 import com.krolak.windsurferweatherforecaster.interfaces.WeatherAnalysisService;
 import com.krolak.windsurferweatherforecaster.interfaces.WeatherBitApiUrlCreator;
 import org.junit.jupiter.api.Test;

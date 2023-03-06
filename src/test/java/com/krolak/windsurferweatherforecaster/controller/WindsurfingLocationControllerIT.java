@@ -1,8 +1,7 @@
-package com.krolak.windsurferweatherforecaster.controllers;
+package com.krolak.windsurferweatherforecaster.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.krolak.windsurferweatherforecaster.WindsurferWeatherForecasterApplication;
-import com.krolak.windsurferweatherforecaster.dtos.GoodWeatherLocationDto;
+import com.krolak.windsurferweatherforecaster.dto.GoodWeatherLocationDto;
 import com.krolak.windsurferweatherforecaster.interfaces.WindsurfingLocationFinder;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

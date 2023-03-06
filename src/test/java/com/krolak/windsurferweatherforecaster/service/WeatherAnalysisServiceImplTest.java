@@ -1,8 +1,8 @@
-package com.krolak.windsurferweatherforecaster.services;
+package com.krolak.windsurferweatherforecaster.service;
 
-import com.krolak.windsurferweatherforecaster.dtos.GeneralWeatherResponseDto;
-import com.krolak.windsurferweatherforecaster.dtos.GoodWeatherLocationDto;
-import com.krolak.windsurferweatherforecaster.exceptions.NoGoodWeatherLocationFoundException;
+import com.krolak.windsurferweatherforecaster.dto.GeneralWeatherResponseDto;
+import com.krolak.windsurferweatherforecaster.dto.GoodWeatherLocationDto;
+import com.krolak.windsurferweatherforecaster.exception.NoGoodWeatherLocationFoundException;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
